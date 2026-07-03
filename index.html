@@ -3,296 +3,267 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Omnitrix Challenge — Kamyla Edition</title>
+<title>Vanity Quiz — Maquillaje</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --void: #060907;
-    --panel: #0d1611;
-    --panel-2: #101c15;
-    --omni-green: #39ff6a;
-    --omni-green-dim: #1f8f42;
-    --hazard: #ff3b3b;
-    --silver: #b9c7bd;
-    --white: #eafff1;
-    --glass: rgba(57,255,106,0.06);
+    --cream: #FBF3EE;
+    --blush: #F2C6C2;
+    --blush-deep: #E7A6A0;
+    --plum: #3B1F2B;
+    --plum-soft: #5C3444;
+    --gold: #C9A15E;
+    --gold-light: #E7CE9B;
+    --miss: #C96A5A;
+    --ink: #2A1620;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     min-height:100vh;
     background:
-      radial-gradient(circle at 50% 0%, rgba(57,255,106,0.10), transparent 55%),
-      repeating-linear-gradient(0deg, rgba(57,255,106,0.025) 0px, rgba(57,255,106,0.025) 1px, transparent 1px, transparent 3px),
-      var(--void);
-    color:var(--white);
-    font-family:'Rajdhani',sans-serif;
+      radial-gradient(circle at 50% -10%, rgba(201,161,94,0.18), transparent 55%),
+      linear-gradient(180deg, var(--cream), #f6e9e2 60%, var(--cream));
+    color:var(--ink);
+    font-family:'Quicksand',sans-serif;
     display:flex;
     align-items:flex-start;
     justify-content:center;
     padding:32px 16px 80px;
   }
-  .stage{
-    width:100%;
-    max-width:760px;
-  }
+  .stage{ width:100%; max-width:740px; }
 
-  /* ---------- HEADER / DIAL ---------- */
-  .header{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    margin-bottom:28px;
+  /* ---------- ESPEJO DE TOCADOR ---------- */
+  .mirror-wrap{
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center; margin-bottom:26px;
   }
-  .dial{
-    width:96px;height:96px;
-    border-radius:50%;
+  .mirror{
     position:relative;
+    width:180px; height:120px;
+    border-radius:50% / 60%;
     background:
-      radial-gradient(circle at 35% 30%, #1f3a26, #050a06 70%);
-    border:3px solid var(--omni-green-dim);
-    box-shadow:0 0 24px rgba(57,255,106,0.35), inset 0 0 18px rgba(0,0,0,0.6);
-    display:flex;align-items:center;justify-content:center;
-    margin-bottom:14px;
-    animation:pulse 2.6s ease-in-out infinite;
+      radial-gradient(ellipse at 40% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0.05) 60%),
+      linear-gradient(160deg, #fff, #f2dfd6);
+    border:6px solid var(--gold);
+    box-shadow:0 12px 28px rgba(59,31,43,0.18), inset 0 0 20px rgba(255,255,255,0.6);
+    margin-bottom:16px;
   }
-  .dial::before{
-    content:"";
+  .bulbs{
+    position:absolute; inset:-16px;
+    pointer-events:none;
+  }
+  .bulb{
     position:absolute;
-    width:38px;height:38px;
-    background:var(--omni-green);
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    filter:drop-shadow(0 0 6px rgba(57,255,106,0.9));
+    width:9px;height:9px;border-radius:50%;
+    background:#f0e0d2;
+    box-shadow:0 0 4px rgba(0,0,0,0.15);
+    transition:all .3s ease;
   }
-  @keyframes pulse{
-    0%,100%{box-shadow:0 0 18px rgba(57,255,106,0.28), inset 0 0 18px rgba(0,0,0,0.6);}
-    50%{box-shadow:0 0 34px rgba(57,255,106,0.55), inset 0 0 18px rgba(0,0,0,0.6);}
+  .bulb.lit{
+    background:var(--gold-light);
+    box-shadow:0 0 10px 3px rgba(231,206,155,0.9), 0 0 2px #fff;
   }
   .eyebrow{
-    font-family:'Orbitron',sans-serif;
-    font-size:11px;
-    letter-spacing:4px;
-    color:var(--omni-green);
+    font-family:'Quicksand',sans-serif;
+    font-size:11px; letter-spacing:4px;
+    color:var(--gold);
     text-transform:uppercase;
+    font-weight:700;
     margin-bottom:6px;
   }
   h1{
-    font-family:'Orbitron',sans-serif;
-    font-weight:900;
-    font-size:clamp(24px,5vw,34px);
+    font-family:'Cormorant Garamond',serif;
+    font-weight:700;
+    font-size:clamp(28px,6vw,40px);
     margin:0 0 6px;
-    letter-spacing:1px;
-    color:var(--white);
+    color:var(--plum);
+    letter-spacing:0.5px;
   }
-  h1 span{color:var(--omni-green);}
+  h1 em{
+    font-style:normal;
+    color:var(--miss);
+  }
   .subtitle{
-    color:var(--silver);
+    color:var(--plum-soft);
     font-size:16px;
-    max-width:480px;
+    max-width:460px;
     line-height:1.5;
   }
 
-  /* ---------- PROGRESS ---------- */
+  /* ---------- PROGRESO (barra tipo labial) ---------- */
   .progress-wrap{
-    display:flex;align-items:center;gap:12px;
-    margin:26px 0 6px;
+    display:flex; align-items:center; gap:12px;
+    margin:24px 0 6px;
   }
   .progress-track{
-    flex:1;height:10px;border-radius:6px;
-    background:#0a140d;
-    border:1px solid rgba(57,255,106,0.25);
+    flex:1; height:12px; border-radius:8px;
+    background:#f1e0d8;
+    border:1px solid rgba(59,31,43,0.12);
     overflow:hidden;
+    position:relative;
   }
   .progress-fill{
     height:100%;
-    background:linear-gradient(90deg, var(--omni-green-dim), var(--omni-green));
+    background:linear-gradient(90deg, var(--blush-deep), var(--miss));
     width:0%;
     transition:width .35s ease;
-    box-shadow:0 0 10px rgba(57,255,106,0.6);
   }
   .progress-label{
-    font-family:'Orbitron',sans-serif;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
     font-size:12px;
-    color:var(--silver);
+    color:var(--plum-soft);
     white-space:nowrap;
   }
 
-  /* ---------- CARD ---------- */
+  /* ---------- TARJETA ---------- */
   .card{
-    background:linear-gradient(180deg, var(--panel), var(--panel-2));
-    border:1px solid rgba(57,255,106,0.18);
-    border-radius:18px;
-    padding:30px 28px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    background:#fffaf7;
+    border:1px solid rgba(201,161,94,0.35);
+    border-radius:22px;
+    padding:32px 30px;
+    box-shadow:0 20px 46px rgba(59,31,43,0.10);
     position:relative;
     overflow:hidden;
   }
   .card::before{
     content:"";
-    position:absolute; top:0; left:0; right:0; height:3px;
-    background:linear-gradient(90deg, transparent, var(--omni-green), transparent);
+    position:absolute; top:0; left:0; right:0; height:5px;
+    background:linear-gradient(90deg, var(--gold-light), var(--miss), var(--gold-light));
   }
   .q-tag{
-    font-family:'Orbitron',sans-serif;
+    font-family:'Quicksand',sans-serif;
     font-size:12px;
-    color:var(--omni-green);
+    font-weight:700;
+    color:var(--miss);
     letter-spacing:2px;
     margin-bottom:10px;
+    text-transform:uppercase;
   }
   .q-text{
-    font-size:22px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:26px;
     font-weight:600;
-    line-height:1.4;
+    line-height:1.35;
     margin:0 0 22px;
-    color:var(--white);
+    color:var(--plum);
   }
-  .options{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-  }
+  .options{ display:flex; flex-direction:column; gap:12px; }
   .opt{
     text-align:left;
-    background:var(--glass);
-    border:1px solid rgba(185,199,189,0.25);
-    color:var(--white);
+    background:#fff;
+    border:1px solid rgba(59,31,43,0.14);
+    color:var(--ink);
     padding:14px 16px;
-    border-radius:10px;
-    font-family:'Rajdhani',sans-serif;
-    font-size:17px;
+    border-radius:12px;
+    font-family:'Quicksand',sans-serif;
+    font-size:16px;
     font-weight:600;
     cursor:pointer;
     transition:all .15s ease;
-    display:flex;
-    align-items:center;
-    gap:12px;
+    display:flex; align-items:center; gap:12px;
   }
   .opt .letter{
-    font-family:'Orbitron',sans-serif;
-    font-size:12px;
-    width:26px;height:26px;
-    border-radius:50%;
-    border:1px solid rgba(185,199,189,0.4);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-    color:var(--silver);
+    font-family:'Quicksand',sans-serif;
+    font-size:12px; font-weight:700;
+    width:26px;height:26px;border-radius:50%;
+    border:1px solid rgba(59,31,43,0.25);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; color:var(--plum-soft);
   }
   .opt:hover:not(.locked){
-    border-color:var(--omni-green);
-    background:rgba(57,255,106,0.12);
+    border-color:var(--miss);
+    background:rgba(242,198,194,0.25);
     transform:translateX(2px);
   }
   .opt.correct{
-    border-color:var(--omni-green);
-    background:rgba(57,255,106,0.22);
-    box-shadow:0 0 16px rgba(57,255,106,0.4);
+    border-color:var(--gold);
+    background:rgba(231,206,155,0.35);
+    box-shadow:0 0 14px rgba(201,161,94,0.35);
   }
-  .opt.correct .letter{background:var(--omni-green);color:#04130a;border-color:var(--omni-green);}
+  .opt.correct .letter{background:var(--gold);color:#fff;border-color:var(--gold);}
   .opt.wrong{
-    border-color:var(--hazard);
-    background:rgba(255,59,59,0.15);
+    border-color:var(--miss);
+    background:rgba(201,106,90,0.14);
   }
-  .opt.wrong .letter{background:var(--hazard);color:#1a0303;border-color:var(--hazard);}
-  .opt.locked{cursor:default;}
+  .opt.wrong .letter{background:var(--miss);color:#fff;border-color:var(--miss);}
+  .opt.locked{ cursor:default; }
 
-  .footer-row{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:24px;
-  }
+  .footer-row{ display:flex; justify-content:flex-end; margin-top:24px; }
   .btn{
-    font-family:'Orbitron',sans-serif;
-    font-size:13px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    background:var(--omni-green);
-    color:#04130a;
+    font-family:'Quicksand',sans-serif;
+    font-size:13px; font-weight:700;
+    letter-spacing:1.2px; text-transform:uppercase;
+    background:linear-gradient(120deg, var(--miss), var(--blush-deep));
+    color:#fff;
     border:none;
     padding:13px 26px;
-    border-radius:10px;
+    border-radius:12px;
     cursor:pointer;
-    font-weight:700;
     transition:transform .12s ease, box-shadow .12s ease;
-    box-shadow:0 6px 18px rgba(57,255,106,0.35);
+    box-shadow:0 8px 18px rgba(201,106,90,0.35);
   }
-  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(57,255,106,0.5);}
-  .btn:disabled{opacity:0.35; cursor:not-allowed; transform:none; box-shadow:none;}
-  .btn.ghost{
-    background:transparent;
-    color:var(--omni-green);
-    border:1px solid var(--omni-green);
-    box-shadow:none;
-  }
+  .btn:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(201,106,90,0.45); }
+  .btn:disabled{ opacity:0.35; cursor:not-allowed; transform:none; box-shadow:none; }
 
-  /* ---------- START / RESULT ---------- */
-  .center-card{
-    text-align:center;
-  }
-  .center-card p{color:var(--silver); font-size:16px; line-height:1.6;}
-  .start-name{
-    font-family:'Orbitron',sans-serif;
-    color:var(--omni-green);
-  }
+  .center-card{ text-align:center; }
+  .center-card p{ color:var(--plum-soft); font-size:16px; line-height:1.6; }
+  .start-name{ font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--miss); font-size:19px; }
   .big-score{
-    font-family:'Orbitron',sans-serif;
-    font-size:56px;
-    font-weight:900;
-    color:var(--omni-green);
-    margin:10px 0 4px;
-    text-shadow:0 0 20px rgba(57,255,106,0.5);
+    font-family:'Cormorant Garamond',serif;
+    font-size:58px; font-weight:700;
+    color:var(--miss);
+    margin:8px 0 4px;
   }
   .rank{
-    font-family:'Orbitron',sans-serif;
-    font-size:16px;
-    letter-spacing:2px;
-    color:var(--white);
-    margin-bottom:18px;
+    font-family:'Quicksand',sans-serif;
+    font-weight:700;
+    font-size:15px; letter-spacing:1.5px;
+    color:var(--plum);
+    margin-bottom:16px;
     text-transform:uppercase;
   }
-  .action-row{
-    display:flex;
-    gap:12px;
-    justify-content:center;
-    margin-top:26px;
-    flex-wrap:wrap;
-  }
-  .hidden{display:none !important;}
+  .action-row{ display:flex; gap:12px; justify-content:center; margin-top:24px; flex-wrap:wrap; }
+  .hidden{ display:none !important; }
 
   @media (max-width:520px){
-    .card{padding:22px 18px;}
-    .q-text{font-size:19px;}
+    .card{ padding:24px 18px; }
+    .q-text{ font-size:21px; }
+    .mirror{ width:150px; height:100px; }
   }
 </style>
 </head>
 <body>
 <div class="stage">
 
-  <div class="header">
-    <div class="dial"></div>
-    <div class="eyebrow">Omnitrix · Sistema de reconocimiento alienígena</div>
-    <h1>Prueba de <span>Alien Data</span></h1>
-    <div class="subtitle">Edición especial para <strong>Kamyla</strong> — 50 preguntas sobre todas las especies del Omnitrix</div>
+  <div class="mirror-wrap">
+    <div class="mirror">
+      <div class="bulbs" id="bulbs"></div>
+    </div>
+    <div class="eyebrow">Tocador de belleza · Ronda de expertas</div>
+    <h1>Quiz de <em>Maquillaje</em></h1>
+    <div class="subtitle">Especial para <strong>Kamyla</strong> — 60 preguntas para saber qué tanto dominas el mundo del makeup</div>
   </div>
 
-  <!-- PANTALLA DE INICIO -->
+  <!-- INICIO -->
   <div class="card center-card" id="screen-start">
-    <p style="margin-top:0;">Hola <span class="start-name">Kamyla</span> 👋 Azmuth necesita verificar si de verdad conoces a todos los alienígenas de Ben 10.</p>
-    <p>Son <strong>50 preguntas</strong> de opción múltiple sobre las series originales, Alien Force, Ultimate Alien y Omniverse.</p>
+    <p style="margin-top:0;">Hola <span class="start-name">Kamyla</span> 💄 Es hora de sentarte frente al espejo y demostrar tus conocimientos.</p>
+    <p>Son <strong>60 preguntas</strong> de opción múltiple sobre bases, correctores, cejas, ojos, labios y trucos de maquillaje.</p>
     <div class="action-row">
-      <button class="btn" id="btn-start">Activar Omnitrix ▸</button>
+      <button class="btn" id="btn-start">Encender el espejo ▸</button>
     </div>
   </div>
 
-  <!-- PANTALLA DE PREGUNTA -->
+  <!-- QUIZ -->
   <div class="hidden" id="screen-quiz">
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
-      <div class="progress-label" id="progress-label">1 / 50</div>
+      <div class="progress-label" id="progress-label">1 / 60</div>
     </div>
     <div class="card">
-      <div class="q-tag" id="q-tag">TRANSFORMACIÓN 01</div>
+      <div class="q-tag" id="q-tag">PASO 01</div>
       <p class="q-text" id="q-text">Pregunta</p>
       <div class="options" id="options"></div>
       <div class="footer-row">
@@ -301,14 +272,14 @@
     </div>
   </div>
 
-  <!-- PANTALLA DE RESULTADOS -->
+  <!-- RESULTADO -->
   <div class="hidden card center-card" id="screen-result">
-    <div class="eyebrow" style="margin-bottom:10px;">Diagnóstico completo</div>
-    <div class="big-score" id="score-number">0/50</div>
+    <div class="eyebrow" style="margin-bottom:10px;">Resultado final</div>
+    <div class="big-score" id="score-number">0/60</div>
     <div class="rank" id="score-rank">RANGO</div>
     <p id="score-msg"></p>
     <div class="action-row">
-      <button class="btn" id="btn-retry">Reiniciar Omnitrix ↺</button>
+      <button class="btn" id="btn-retry">Repetir el quiz ↺</button>
     </div>
   </div>
 
@@ -316,56 +287,66 @@
 
 <script>
 const questions = [
-  {q:"¿Cómo se llama el reloj alienígena que usa Ben Tennyson?", o:["Omnitrix","Ultimatrix","Bio-Matriz","Ascensión"], a:0},
-  {q:"¿Quién creó el Omnitrix?", o:["Vilgax","Azmuth","Paradox","Max Tennyson"], a:1},
-  {q:"¿Cómo se llama el abuelo de Ben?", o:["Max Tennyson","Carl Tennyson","Grandpa Matt","Frank Tennyson"], a:0},
-  {q:"¿Cómo se llama la prima de Ben que aparece en toda la serie?", o:["Julie","Kai","Gwen Tennyson","Charmcaster"], a:2},
-  {q:"¿Cuál es el nombre del conquistador alienígena calamar, archienemigo de Ben?", o:["Vilgax","Aggregor","Zs'Skayr","Diagon"], a:0},
-  {q:"¿Cómo se llama el rival/amigo de Ben que puede absorber materiales?", o:["Cash Murray","Kevin Levin","Devlin","Michael Morningstar"], a:1},
-  {q:"¿Cuántos alienígenas tenía el Omnitrix original antes de desbloquear más?", o:["5","10","12","1"], a:1},
-  {q:"¿Cuál es el alienígena de fuego, de la especie Pyronite?", o:["Swampfire","Heatblast","NRG","Armodrillo"], a:1},
-  {q:"¿Qué alienígena tiene súper velocidad y es de la especie Kineceleran?", o:["XLR8","Fasttrack","Jetray","Rath"], a:0},
-  {q:"¿Qué alienígena está hecho de cristal, de la especie Petrosapien?", o:["Chromastone","Diamondhead","Armodrillo","Terraspin"], a:1},
-  {q:"¿Cómo se llama el alienígena con cuatro brazos y súper fuerza?", o:["Four Arms","Humungousaur","Cannonbolt","Rath"], a:0},
-  {q:"¿Qué alienígena diminuto y genio pertenece a la especie Galvan?", o:["Brainstorm","Grey Matter","Upgrade","Lodestar"], a:1},
-  {q:"¿Qué alienígena parecido a una polilla vuela y dispara baba pegajosa?", o:["Spidermonkey","Big Chill","Stinkfly","Whampire"], a:2},
-  {q:"¿Cómo se llama el alienígena pez que puede respirar bajo el agua?", o:["AmpFibian","Ripjaws","Water Hazard","Terraspin"], a:1},
-  {q:"¿Qué alienígena puede fusionarse con máquinas y es de metal líquido?", o:["Upgrade","NRG","Feedback","Goop"], a:0},
-  {q:"¿Qué alienígena sin ojos usa el olfato para rastrear, de la especie Vulpimancer?", o:["Wildmutt","Rath","Blitzwolfer","Fasttrack"], a:0},
-  {q:"¿Qué alienígena fantasma puede volverse invisible y absorber energía?", o:["Whampire","Ghostfreak","Big Chill","Alien X"], a:1},
-  {q:"¿Qué alienígena tiene forma de armadillo y rueda a gran velocidad para atacar?", o:["Cannonbolt","Armodrillo","Terraspin","Bloxx"], a:0},
-  {q:"¿Cómo se llama el alienígena gigante de la especie To'kustar?", o:["Humungousaur","Way Big","Atomix","NRG"], a:1},
-  {q:"¿Cuál es considerado el alienígena más poderoso del universo, formado por tres seres?", o:["Way Big","Atomix","Alien X","Feedback"], a:2},
-  {q:"¿Cómo se llaman las dos personalidades que comparten el control de Alien X junto con Ben?", o:["Serena y Bellicus","Vilgax y Aggregor","Paradox y Azmuth","Yenaldooshi y Zs'Skayr"], a:0},
-  {q:"¿Qué alienígena dinosaurio gigante aparece por primera vez en Alien Force?", o:["Humungousaur","Way Big","Four Arms","Terraspin"], a:0},
-  {q:"¿Qué alienígena de planta y fuego reemplaza a Heatblast en Alien Force?", o:["NRG","Swampfire","Armodrillo","Goop"], a:1},
-  {q:"¿Qué alienígena helado con alas puede volverse intangible como un fantasma?", o:["Big Chill","Whampire","Ghostfreak","AmpFibian"], a:0},
-  {q:"¿Qué alienígena de cristal absorbe y dispara energía cósmica?", o:["Diamondhead","Chromastone","Terraspin","Lodestar"], a:1},
-  {q:"¿Qué alienígena puede clonarse a sí mismo y atacar con ondas de sonido?", o:["Echo Echo","Feedback","Buzzshock","Spidermonkey"], a:0},
-  {q:"¿Qué alienígena mono con seis brazos teje telarañas resistentes?", o:["Wildmutt","Spidermonkey","Kickin Hawk","Rath"], a:1},
-  {q:"¿Qué alienígena es una masa verde viscosa capaz de regenerarse?", o:["Goop","Gutrot","Upgrade","AmpFibian"], a:0},
-  {q:"¿Qué alienígena parecido a un crustáceo es un genio con control mental?", o:["Brainstorm","Grey Matter","Eatle","Bloxx"], a:0},
-  {q:"¿Qué alienígena magnético puede controlar y manipular metales?", o:["Lodestar","NRG","Armodrillo","Shocksquatch"], a:0},
-  {q:"¿Qué alienígena furioso solo grita su propio nombre durante las peleas?", o:["Four Arms","Rath","Humungousaur","Gutrot"], a:1},
-  {q:"¿Qué alienígena volador, parecido a una raya, dispara rayos de energía por los ojos?", o:["Jetray","Astrodactyl","Big Chill","Stinkfly"], a:0},
-  {q:"¿Qué alienígena está compuesto de energía nuclear radiactiva contenida en un traje?", o:["NRG","Feedback","Atomix","Heatblast"], a:0},
-  {q:"¿Qué alienígena puede lanzar chorros de agua a alta presión?", o:["AmpFibian","Water Hazard","Ripjaws","Terraspin"], a:1},
-  {q:"¿Qué alienígena tortuga puede generar tornados girando su caparazón?", o:["Terraspin","Cannonbolt","Bloxx","Armodrillo"], a:0},
-  {q:"¿Qué alienígena de piedra tiene puños que funcionan como taladros?", o:["Armodrillo","Diamondhead","Chromastone","Gravattack"], a:0},
-  {q:"¿Qué alienígena puede volverse eléctrico y también respirar bajo el agua?", o:["AmpFibian","Feedback","Shocksquatch","Ripjaws"], a:0},
-  {q:"¿Qué alienígena camaleón puede volverse invisible y trepar paredes?", o:["ChamAlien","Ghostfreak","Big Chill","Wildmutt"], a:0},
-  {q:"En Ultimate Alien, ¿cómo se llama la evolución de un alienígena tras usar el Ultimatrix?", o:["Alien Definitivo (Ultimate)","Alien Supremo","Alien Omega","Alien Prime"], a:0},
-  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Swampfire?", o:["Ultimate Swampfire","Ultimate Humungousaur","Ultimate Big Chill","Ultimate Echo Echo"], a:0},
-  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Humungousaur?", o:["Ultimate Cannonbolt","Ultimate Humungousaur","Ultimate Four Arms","Ultimate Rath"], a:1},
-  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Echo Echo?", o:["Ultimate Echo Echo","Ultimate Spidermonkey","Ultimate Jetray","Ultimate NRG"], a:0},
-  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Big Chill?", o:["Ultimate Ghostfreak","Ultimate Big Chill","Ultimate Chromastone","Ultimate Goop"], a:1},
-  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Spidermonkey?", o:["Ultimate Spidermonkey","Ultimate Wildmutt","Ultimate Stinkfly","Ultimate Whampire"], a:0},
-  {q:"En Ben 10: Omniverse, ¿qué alienígena cúbico puede separar su cuerpo en bloques individuales?", o:["Bloxx","Gravattack","Ball Weevil","Toepick"], a:0},
-  {q:"¿Qué alienígena de Omniverse es una versión evolucionada y veloz de la especie Kineceleran?", o:["XLR8","Fasttrack","Jetray","Kickin Hawk"], a:1},
-  {q:"¿Qué alienígena parecido a un yeti genera electricidad al gritar?", o:["Shocksquatch","AmpFibian","Feedback","NRG"], a:0},
-  {q:"¿Qué alienígena saltamontes gigante aparece en Ben 10: Omniverse?", o:["Crashhopper","Kickin Hawk","Astrodactyl","Bullfrag"], a:0},
-  {q:"¿Qué alienígena vampiro puede convertir a otras personas en sus esbirros?", o:["Ghostfreak","Whampire","Gutrot","Zs'Skayr"], a:1},
-  {q:"¿Qué alienígena parecido a un pterodáctilo, de Omniverse, vuela y genera ráfagas de energía cósmica?", o:["Jetray","Astrodactyl","Stinkfly","Big Chill"], a:1}
+{q:"¿Para qué sirve el primer?", o:["Para preparar la piel y hacer que el maquillaje dure más","Para hidratar profundamente por la noche","Para eliminar el maquillaje","Para dar color a las mejillas"], a:0},
+{q:"¿Qué va primero, el corrector o la base?", o:["El corrector","La base","Se aplican al mismo tiempo","El polvo traslúcido"], a:1},
+{q:"¿Cuál es la diferencia entre base líquida y base en polvo?", o:["La líquida seca la piel; la de polvo hidrata","Son exactamente iguales","La líquida da más cobertura; la de polvo sella y matifica","La de polvo da más cobertura que la líquida"], a:2},
+{q:"¿Para qué sirve el polvo traslúcido?", o:["Para dar color a la piel","Para sellar el maquillaje y controlar el brillo","Para eliminar el maquillaje","Para hidratar la piel"], a:1},
+{q:"¿Qué es el contour?", o:["Una técnica para hidratar la piel","Un producto para labios","Una técnica para dar profundidad y definir el rostro","Una técnica para rizar las pestañas"], a:2},
+{q:"¿Qué hace el iluminador?", o:["Resalta las zonas donde se aplica","Oscurece las zonas donde se aplica","Sirve para fijar el maquillaje","Sirve para limpiar los pinceles"], a:0},
+{q:"¿Dónde se aplica el rubor?", o:["En los párpados","En los labios","En las mejillas","En la frente"], a:2},
+{q:"¿Qué producto se usa para rellenar las cejas?", o:["Base líquida","Delineador líquido","Bronzer","Lápiz, sombra o pomada para cejas"], a:3},
+{q:"¿Cuál es la diferencia entre un labial mate y uno satinado?", o:["El mate tiene más brillo que el satinado","El mate no tiene brillo; el satinado sí","Son iguales, solo cambia el color","El satinado viene en polvo"], a:1},
+{q:"¿Qué es un lip gloss?", o:["Un tipo de base","Un brillo para labios","Un corrector para labios","Un removedor de maquillaje"], a:1},
+{q:"¿Qué hace el spray fijador?", o:["Ayuda a que el maquillaje dure más tiempo","Sirve para desmaquillar","Da color a la piel","Rellena las cejas"], a:0},
+{q:"¿Qué es una beauty blender?", o:["Un lápiz para cejas","Una esponja para aplicar maquillaje","Un tipo de labial","Un pincel para delinear"], a:1},
+{q:"¿Se usa húmeda o seca?", o:["Húmeda","Seca","Congelada","No importa"], a:0},
+{q:"¿Qué brocha se usa para el rubor?", o:["Brocha para delinear ojos","Una brocha para rubor (redonda o angular)","Brocha para labios","Brocha afilada para cejas"], a:1},
+{q:"¿Qué significa acabado mate?", o:["Con mucho brillo","Con efecto húmedo","Sin brillo","Con destellos dorados"], a:2},
+{q:"¿Qué significa acabado luminoso?", o:["Sin ningún brillo","Con efecto brillante o jugoso","Con textura en polvo","Resistente al agua"], a:1},
+{q:"¿Para qué sirve el corrector verde?", o:["Para neutralizar ojeras moradas","Para neutralizar rojeces","Para aclarar manchas oscuras","Para neutralizar el amarillo"], a:1},
+{q:"¿Para qué sirve el corrector morado?", o:["Para neutralizar rojeces","Para aclarar la piel","Para dar color a los labios","Para neutralizar tonos amarillos"], a:3},
+{q:"¿Qué producto hace durar más las sombras?", o:["El rímel","El delineador líquido","El primer para ojos","El rizador de pestañas"], a:2},
+{q:"¿Qué es una paleta de sombras?", o:["Un conjunto de sombras de diferentes colores","Un tipo de base","Una brocha especial","Un removedor de maquillaje"], a:0},
+{q:"¿Cuál es la diferencia entre sombras mate y metálicas?", o:["Las mate brillan más que las metálicas","Son exactamente iguales","Las mate no brillan; las metálicas sí","Las metálicas son solo para cejas"], a:2},
+{q:"¿Qué es un delineador en gel?", o:["Un delineador de textura cremosa que se aplica con brocha","Un delineador líquido con pincel fino","Un lápiz muy duro","Un polvo compacto para ojos"], a:0},
+{q:"¿Qué es el cat eye?", o:["Un delineado solo en la línea de agua","Una sombra difuminada sin línea","Un delineado con una punta alargada hacia afuera","Un delineado en el labio inferior"], a:2},
+{q:"¿Para qué sirve el rizador de pestañas?", o:["Para curvar las pestañas","Para pegar pestañas postizas","Para pintar las pestañas","Para rellenar las cejas"], a:0},
+{q:"¿Qué va primero, el rímel o las pestañas postizas?", o:["El rímel","Las pestañas postizas","Se aplican al mismo tiempo","No importa el orden"], a:1},
+{q:"¿Qué es el pegamento para pestañas?", o:["Un tipo de rímel","Un adhesivo especial para fijarlas","Un fijador para cejas","Un removedor de maquillaje"], a:1},
+{q:"¿Qué es la waterline?", o:["La línea de las cejas","La línea interna del ojo","El pliegue del párpado","El borde exterior del labio"], a:1},
+{q:"¿Qué significa waterproof?", o:["Resistente al calor","Resistente al agua","De larga duración en general","Hipoalergénico"], a:1},
+{q:"¿Qué es el baking?", o:["Aplicar base con calor","Mezclar dos bases distintas","Dejar polvo traslúcido unos minutos para sellar el maquillaje","Secar el rímel al aire libre"], a:2},
+{q:"¿Para qué sirve el bronzer?", o:["Para dar un efecto mate","Para dar un efecto bronceado","Para dar un efecto iluminado","Para hidratar la piel"], a:1},
+{q:"¿Diferencia entre bronzer y contour?", o:["Son el mismo producto","El contour da calidez y el bronzer crea sombras","El bronzer da calidez; el contour crea sombras","El bronzer ilumina y el contour hidrata"], a:2},
+{q:"¿Qué es un lip liner?", o:["Un brillo para labios","Un delineador para labios","Una base para labios","Un removedor de labial"], a:1},
+{q:"¿Para qué sirve un tinte para labios?", o:["Para dar un efecto brillante temporal","Para dar color duradero","Para hidratar profundamente","Para dar volumen instantáneo"], a:1},
+{q:"¿Qué es un gloss plumping?", o:["Un brillo que hace ver los labios más voluminosos","Un brillo con acabado mate","Un fijador de labial","Un aclarador de labios"], a:0},
+{q:"¿Qué es una base de cobertura ligera?", o:["Cubre casi todas las imperfecciones","Cubre poco y se ve natural","No cubre nada en absoluto","Solo sirve para las ojeras"], a:1},
+{q:"¿Y una de cobertura completa?", o:["Cubre poco y se ve natural","Solo se usa en los labios","Cubre casi todas las imperfecciones","Es siempre en polvo"], a:2},
+{q:"¿Qué es el subtono de la piel?", o:["El color exacto de la base que usas","El tono base debajo del color de la piel","El brillo natural de la piel","La textura de la piel"], a:1},
+{q:"¿Cuáles son los subtonos más comunes?", o:["Claro, medio, oscuro","Mate, satinado, brillante","Frío, cálido y neutro","Rosa, durazno, amarillo"], a:2},
+{q:"¿Cómo sabes si una base es de tu tono?", o:["Probándola en la mano","Comparándola con el color del cabello","Probándola en la mandíbula","Mirando el color del envase"], a:2},
+{q:"¿Qué producto sella el maquillaje?", o:["El iluminador","El polvo traslúcido","El corrector","El primer"], a:1},
+{q:"¿Qué es un maquillaje full glam?", o:["Un maquillaje muy natural","Un maquillaje solo de labios","Un maquillaje intenso y muy elaborado","Un maquillaje sin base"], a:2},
+{q:"¿Qué es el no makeup makeup?", o:["Un maquillaje muy cargado","Un maquillaje que parece natural","Un maquillaje solo de noche","Un maquillaje sin ningún producto"], a:1},
+{q:"¿Qué significa difuminar?", o:["Aplicar mucho producto de golpe","Mezclar para que no se vean líneas marcadas","Quitar el exceso de maquillaje","Fijar el maquillaje con spray"], a:1},
+{q:"¿Qué brocha se usa para difuminar sombras?", o:["Brocha de contorno","Una brocha de difuminar","Brocha de labios","Brocha de cejas"], a:1},
+{q:"¿Para qué sirve el delineador blanco?", o:["Para oscurecer la mirada","Para cubrir imperfecciones","Para agrandar visualmente los ojos","Para fijar las pestañas"], a:2},
+{q:"¿Qué es un labial de larga duración?", o:["Un labial que se aplica solo de noche","Un labial que cambia de color con el calor","Un labial que permanece muchas horas","Un labial que siempre es mate"], a:2},
+{q:"¿Qué es un maquillaje en crema?", o:["Productos en polvo compacto","Productos con textura cremosa","Productos líquidos muy ligeros","Productos en aerosol"], a:1},
+{q:"¿Diferencia entre rubor líquido y en polvo?", o:["El polvo da un acabado más natural que el líquido","Son exactamente iguales en textura","El líquido da un acabado más natural; el de polvo es más fácil de sellar","El líquido es más fácil de sellar que el polvo"], a:2},
+{q:"¿Qué se usa para quitar el maquillaje?", o:["Solo agua","Desmaquillante o agua micelar","Base líquida","Polvo traslúcido"], a:1},
+{q:"¿Qué es el agua micelar?", o:["Un tónico para fijar el color","Un primer para el rostro","Un limpiador que elimina maquillaje e impurezas","Un spray fijador"], a:2},
+{q:"¿Por qué hay que desmaquillarse antes de dormir?", o:["Para que el maquillaje dure más al día siguiente","Para evitar obstrucción de poros e irritaciones","Para hidratar mejor la piel","No tiene ningún motivo especial"], a:1},
+{q:"¿Qué se aplica antes del maquillaje para hidratar la piel?", o:["Polvo traslúcido","Delineador","Crema hidratante","Bronzer"], a:2},
+{q:"¿Qué es un corrector de alta cobertura?", o:["Cubre muy poco, efecto natural","Un corrector que cubre muy bien manchas y ojeras","Sirve solo para los labios","Se usa después del labial"], a:1},
+{q:"¿Dónde se aplica el iluminador?", o:["Solo en los párpados","Solo en el cuello","Pómulos, nariz, arco de Cupido y lagrimal","En toda la cara por igual"], a:2},
+{q:"¿Qué significa que el maquillaje se oxide?", o:["Que se vuelve más claro","Que cambia de color, normalmente se oscurece","Que se vuelve resistente al agua","Que pierde todo el color"], a:1},
+{q:"¿Qué es una prebase para labios?", o:["Quita el color de los labios","Da volumen permanente a los labios","Un producto que prepara los labios y prolonga el labial","Es un tipo de labial mate"], a:2},
+{q:"¿Diferencia entre lápiz y gel para cejas?", o:["El gel rellena y el lápiz fija y peina","Ambos son exactamente iguales","El lápiz rellena; el gel fija y peina","El lápiz fija y el gel da color"], a:2},
+{q:"¿Qué es un pigmento para ojos?", o:["Un líquido brillante para labios","Una crema hidratante para ojeras","Un polvo de color muy intenso para maquillaje","Un fijador para cejas"], a:2},
+{q:"¿Qué producto fija las cejas?", o:["Base líquida","Iluminador","Corrector","Gel para cejas"], a:3},
+{q:"¿Qué es el arco de Cupido?", o:["El pliegue del párpado","La línea de las cejas","La parte en forma de \"V\" del labio superior","El contorno de la mandíbula"], a:2}
 ];
 
 let current = 0;
@@ -383,9 +364,24 @@ const qText = document.getElementById('q-text');
 const optionsEl = document.getElementById('options');
 const progressFill = document.getElementById('progress-fill');
 const progressLabel = document.getElementById('progress-label');
+const bulbsEl = document.getElementById('bulbs');
+
+// Crear bombillas alrededor del espejo
+const BULB_COUNT = 16;
+for(let i=0;i<BULB_COUNT;i++){
+  const angle = (i/BULB_COUNT) * Math.PI * 2;
+  const rx = 50, ry = 50; // porcentaje relativo
+  const x = 50 + rx*Math.cos(angle);
+  const y = 50 + ry*Math.sin(angle)*0.75;
+  const b = document.createElement('div');
+  b.className = 'bulb';
+  b.style.left = x + '%';
+  b.style.top = y + '%';
+  bulbsEl.appendChild(b);
+}
+const bulbEls = bulbsEl.querySelectorAll('.bulb');
 
 function shuffle(arr){
-  // Fisher-Yates, no muta el original
   const a = arr.slice();
   for(let i=a.length-1;i>0;i--){
     const j = Math.floor(Math.random()*(i+1));
@@ -394,9 +390,16 @@ function shuffle(arr){
   return a;
 }
 
+function updateBulbs(){
+  const litCount = Math.round((current/questions.length) * BULB_COUNT);
+  bulbEls.forEach((b, idx) => {
+    if(idx < litCount) b.classList.add('lit');
+    else b.classList.remove('lit');
+  });
+}
+
 function startQuiz(){
-  current = 0;
-  score = 0;
+  current = 0; score = 0;
   screenStart.classList.add('hidden');
   screenResult.classList.add('hidden');
   screenQuiz.classList.remove('hidden');
@@ -407,10 +410,11 @@ function renderQuestion(){
   answered = false;
   btnNext.disabled = true;
   const item = questions[current];
-  qTag.textContent = "TRANSFORMACIÓN " + String(current+1).padStart(2,'0');
+  qTag.textContent = "PASO " + String(current+1).padStart(2,'0');
   qText.textContent = item.q;
   progressLabel.textContent = (current+1) + " / " + questions.length;
-  progressFill.style.width = ((current)/questions.length*100) + "%";
+  progressFill.style.width = (current/questions.length*100) + "%";
+  updateBulbs();
 
   const letters = ['A','B','C','D'];
   const indices = shuffle([0,1,2,3]);
@@ -430,29 +434,29 @@ function selectOption(btn, chosenIdx, correctIdx){
   const allOpts = optionsEl.querySelectorAll('.opt');
   allOpts.forEach(o => o.classList.add('locked'));
 
+  const item = questions[current];
   allOpts.forEach(o => {
-    if(o === btn && chosenIdx === correctIdx){
-      o.classList.add('correct');
-    }
-    if(o === btn && chosenIdx !== correctIdx){
-      o.classList.add('wrong');
+    if(o === btn){
+      o.classList.add(chosenIdx === correctIdx ? 'correct' : 'wrong');
     }
   });
 
   if(chosenIdx === correctIdx){
     score++;
   } else {
-    // resaltar la correcta también
     allOpts.forEach(o => {
-      if(o.textContent.trim().endsWith(questions[current].o[correctIdx])){
+      if(o.textContent.trim().endsWith(item.o[correctIdx])){
         o.classList.add('correct');
       }
     });
   }
 
   progressFill.style.width = ((current+1)/questions.length*100) + "%";
+  current++;
+  updateBulbs();
+  current--; // se ajusta de nuevo en nextQuestion
   btnNext.disabled = false;
-  btnNext.textContent = (current === questions.length-1) ? "Ver diagnóstico ▸" : "Siguiente ▸";
+  btnNext.textContent = (current === questions.length-1) ? "Ver resultado ▸" : "Siguiente ▸";
 }
 
 function nextQuestion(){
@@ -467,25 +471,26 @@ function nextQuestion(){
 function showResult(){
   screenQuiz.classList.add('hidden');
   screenResult.classList.remove('hidden');
+  bulbEls.forEach(b => b.classList.add('lit'));
   document.getElementById('score-number').textContent = score + "/" + questions.length;
 
   let rank, msg;
   const pct = score/questions.length;
   if(pct === 1){
-    rank = "Maestra Omniverse — Nivel Azmuth";
-    msg = "Perfecto, Kamyla. Conoces cada especie del Omnitrix mejor que el propio Ben. 🛸💚";
+    rank = "Maquilladora Profesional";
+    msg = "¡Perfecto, Kamyla! No se te escapa ni un solo truco de maquillaje. 💋✨";
   } else if(pct >= 0.8){
-    rank = "Portadora del Omnitrix";
-    msg = "Excelente puntaje. Podrías transformarte en cualquier alienígena sin dudar. 🔥";
+    rank = "Beauty Guru";
+    msg = "Excelente puntaje, dominas casi todos los conceptos del makeup.";
   } else if(pct >= 0.6){
-    rank = "Plumber en entrenamiento";
-    msg = "Muy bien. Ya conoces a los aliens principales, solo faltan algunos de Omniverse.";
+    rank = "Amante del Maquillaje";
+    msg = "Muy bien. Ya conoces lo esencial, solo faltan algunos detalles técnicos.";
   } else if(pct >= 0.4){
-    rank = "Recluta de la Tierra";
-    msg = "Buen intento. Toca maratonear un par de temporadas más para subir de rango.";
+    rank = "Aprendiz de Tocador";
+    msg = "Buen intento, con un poco más de práctica dominarás cada truco.";
   } else {
-    rank = "Humano sin Omnitrix";
-    msg = "Jaja, no pasa nada — ¡esto es para divertirnos! ¿Repetimos el reto?";
+    rank = "Recién Llegada al Tocador";
+    msg = "No pasa nada, esto es solo para divertirnos. ¿Repetimos el reto?";
   }
   document.getElementById('score-rank').textContent = rank;
   document.getElementById('score-msg').textContent = msg;
