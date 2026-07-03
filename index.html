@@ -3,317 +3,497 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GlamBox - Tu dosis mensual de belleza</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Omnitrix Challenge — Kamyla Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --rose: #F472B6;
-    --rose-light: #FCEEF6;
-    --rose-deep: #DB2777;
-    --mint: #A7F3D0;
-    --lavender: #E9D5FF;
-    --cream: #FFF9F5;
-    --text-dark: #1a0a12;
-    --text-mid: #6b3a52;
+  :root{
+    --void: #060907;
+    --panel: #0d1611;
+    --panel-2: #101c15;
+    --omni-green: #39ff6a;
+    --omni-green-dim: #1f8f42;
+    --hazard: #ff3b3b;
+    --silver: #b9c7bd;
+    --white: #eafff1;
+    --glass: rgba(57,255,106,0.06);
   }
-  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); overflow-x: hidden; }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(57,255,106,0.10), transparent 55%),
+      repeating-linear-gradient(0deg, rgba(57,255,106,0.025) 0px, rgba(57,255,106,0.025) 1px, transparent 1px, transparent 3px),
+      var(--void);
+    color:var(--white);
+    font-family:'Rajdhani',sans-serif;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    padding:32px 16px 80px;
+  }
+  .stage{
+    width:100%;
+    max-width:760px;
+  }
 
-  nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.2rem 2.5rem; background: white;
-    border-bottom: 1.5px solid #fce7f3;
-    position: sticky; top: 0; z-index: 100;
+  /* ---------- HEADER / DIAL ---------- */
+  .header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    margin-bottom:28px;
   }
-  .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--rose-deep); }
-  .logo span { color: var(--rose); font-style: italic; }
-  nav ul { display: flex; gap: 2rem; list-style: none; }
-  nav ul a { text-decoration: none; font-size: 0.9rem; font-weight: 500; color: var(--text-mid); transition: color 0.2s; }
-  nav ul a:hover { color: var(--rose-deep); }
-  .nav-cta {
-    background: var(--rose); color: white; border: none;
-    padding: 0.55rem 1.3rem; border-radius: 50px; font-size: 0.88rem; font-weight: 500;
-    cursor: pointer; transition: background 0.2s, transform 0.15s;
+  .dial{
+    width:96px;height:96px;
+    border-radius:50%;
+    position:relative;
+    background:
+      radial-gradient(circle at 35% 30%, #1f3a26, #050a06 70%);
+    border:3px solid var(--omni-green-dim);
+    box-shadow:0 0 24px rgba(57,255,106,0.35), inset 0 0 18px rgba(0,0,0,0.6);
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:14px;
+    animation:pulse 2.6s ease-in-out infinite;
   }
-  .nav-cta:hover { background: var(--rose-deep); transform: scale(1.03); }
+  .dial::before{
+    content:"";
+    position:absolute;
+    width:38px;height:38px;
+    background:var(--omni-green);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    filter:drop-shadow(0 0 6px rgba(57,255,106,0.9));
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 18px rgba(57,255,106,0.28), inset 0 0 18px rgba(0,0,0,0.6);}
+    50%{box-shadow:0 0 34px rgba(57,255,106,0.55), inset 0 0 18px rgba(0,0,0,0.6);}
+  }
+  .eyebrow{
+    font-family:'Orbitron',sans-serif;
+    font-size:11px;
+    letter-spacing:4px;
+    color:var(--omni-green);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  h1{
+    font-family:'Orbitron',sans-serif;
+    font-weight:900;
+    font-size:clamp(24px,5vw,34px);
+    margin:0 0 6px;
+    letter-spacing:1px;
+    color:var(--white);
+  }
+  h1 span{color:var(--omni-green);}
+  .subtitle{
+    color:var(--silver);
+    font-size:16px;
+    max-width:480px;
+    line-height:1.5;
+  }
 
-  .hero {
-    display: grid; grid-template-columns: 1fr 1fr; align-items: center;
-    gap: 2rem; padding: 5rem 2.5rem 4rem; max-width: 1100px; margin: 0 auto;
+  /* ---------- PROGRESS ---------- */
+  .progress-wrap{
+    display:flex;align-items:center;gap:12px;
+    margin:26px 0 6px;
   }
-  .hero-badge {
-    display: inline-block; background: var(--lavender); color: #7C3AED;
-    font-size: 0.78rem; font-weight: 500; padding: 0.35rem 1rem;
-    border-radius: 50px; margin-bottom: 1.2rem;
+  .progress-track{
+    flex:1;height:10px;border-radius:6px;
+    background:#0a140d;
+    border:1px solid rgba(57,255,106,0.25);
+    overflow:hidden;
   }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    line-height: 1.15; margin-bottom: 1rem;
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--omni-green-dim), var(--omni-green));
+    width:0%;
+    transition:width .35s ease;
+    box-shadow:0 0 10px rgba(57,255,106,0.6);
   }
-  .hero h1 em { color: var(--rose-deep); font-style: italic; }
-  .hero p { color: var(--text-mid); font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; font-weight: 300; }
-  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
-    color: white; border: none; padding: 0.85rem 2rem;
-    border-radius: 50px; font-size: 1rem; font-weight: 500;
-    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 20px rgba(244,114,182,0.35);
+  .progress-label{
+    font-family:'Orbitron',sans-serif;
+    font-size:12px;
+    color:var(--silver);
+    white-space:nowrap;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(244,114,182,0.5); }
-  .btn-secondary {
-    background: transparent; color: var(--rose-deep);
-    border: 1.5px solid var(--rose); padding: 0.85rem 1.8rem;
-    border-radius: 50px; font-size: 1rem; font-weight: 500;
-    cursor: pointer; transition: background 0.2s;
-  }
-  .btn-secondary:hover { background: var(--rose-light); }
 
-  .hero-visual { display: flex; justify-content: center; }
-  .hero-box {
-    width: 280px; height: 280px; background: white;
-    border-radius: 24px; border: 2px solid #fce7f3;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.5rem; position: relative; overflow: hidden;
-    box-shadow: 0 8px 40px rgba(244,114,182,0.15);
+  /* ---------- CARD ---------- */
+  .card{
+    background:linear-gradient(180deg, var(--panel), var(--panel-2));
+    border:1px solid rgba(57,255,106,0.18);
+    border-radius:18px;
+    padding:30px 28px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+    position:relative;
+    overflow:hidden;
   }
-  .hero-box::before {
-    content: ''; position: absolute; top: -40px; right: -40px;
-    width: 120px; height: 120px; background: var(--mint);
-    border-radius: 50%; opacity: 0.5;
+  .card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, transparent, var(--omni-green), transparent);
   }
-  .hero-box::after {
-    content: ''; position: absolute; bottom: -30px; left: -30px;
-    width: 90px; height: 90px; background: var(--lavender);
-    border-radius: 50%; opacity: 0.6;
+  .q-tag{
+    font-family:'Orbitron',sans-serif;
+    font-size:12px;
+    color:var(--omni-green);
+    letter-spacing:2px;
+    margin-bottom:10px;
   }
-  .box-emoji { font-size: 3.5rem; z-index: 1; }
-  .box-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--rose-deep); z-index: 1; }
-  .box-sub { font-size: 0.78rem; color: var(--text-mid); z-index: 1; }
-  .floating-tag {
-    position: absolute; background: white; border: 1px solid #fce7f3;
-    border-radius: 12px; padding: 0.4rem 0.8rem; font-size: 0.75rem;
-    font-weight: 500; color: var(--rose-deep); white-space: nowrap;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  .q-text{
+    font-size:22px;
+    font-weight:600;
+    line-height:1.4;
+    margin:0 0 22px;
+    color:var(--white);
   }
-  .tag1 { top: -12px; left: 20px; }
-  .tag2 { bottom: -12px; right: 20px; }
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .opt{
+    text-align:left;
+    background:var(--glass);
+    border:1px solid rgba(185,199,189,0.25);
+    color:var(--white);
+    padding:14px 16px;
+    border-radius:10px;
+    font-family:'Rajdhani',sans-serif;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .15s ease;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .opt .letter{
+    font-family:'Orbitron',sans-serif;
+    font-size:12px;
+    width:26px;height:26px;
+    border-radius:50%;
+    border:1px solid rgba(185,199,189,0.4);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+    color:var(--silver);
+  }
+  .opt:hover:not(.locked){
+    border-color:var(--omni-green);
+    background:rgba(57,255,106,0.12);
+    transform:translateX(2px);
+  }
+  .opt.correct{
+    border-color:var(--omni-green);
+    background:rgba(57,255,106,0.22);
+    box-shadow:0 0 16px rgba(57,255,106,0.4);
+  }
+  .opt.correct .letter{background:var(--omni-green);color:#04130a;border-color:var(--omni-green);}
+  .opt.wrong{
+    border-color:var(--hazard);
+    background:rgba(255,59,59,0.15);
+  }
+  .opt.wrong .letter{background:var(--hazard);color:#1a0303;border-color:var(--hazard);}
+  .opt.locked{cursor:default;}
 
-  .benefits-section { background: white; padding: 4rem 2.5rem; }
-  .section-label { text-align: center; font-size: 0.78rem; font-weight: 500; color: var(--rose); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.6rem; }
-  .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 3rem; }
-  .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
-  .benefit-card {
-    background: var(--cream); border-radius: 18px; padding: 1.5rem;
-    text-align: center; border: 1.5px solid transparent;
-    transition: border-color 0.2s, transform 0.2s;
+  .footer-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:24px;
   }
-  .benefit-card:hover { border-color: var(--rose); transform: translateY(-4px); }
-  .benefit-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-  .benefit-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; }
-  .benefit-card p { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .btn{
+    font-family:'Orbitron',sans-serif;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    background:var(--omni-green);
+    color:#04130a;
+    border:none;
+    padding:13px 26px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
+    transition:transform .12s ease, box-shadow .12s ease;
+    box-shadow:0 6px 18px rgba(57,255,106,0.35);
+  }
+  .btn:hover{transform:translateY(-2px); box-shadow:0 10px 22px rgba(57,255,106,0.5);}
+  .btn:disabled{opacity:0.35; cursor:not-allowed; transform:none; box-shadow:none;}
+  .btn.ghost{
+    background:transparent;
+    color:var(--omni-green);
+    border:1px solid var(--omni-green);
+    box-shadow:none;
+  }
 
-  .sub-section { padding: 4.5rem 2.5rem; max-width: 1000px; margin: 0 auto; }
-  .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-  .plan-card {
-    background: white; border-radius: 22px; padding: 2rem;
-    border: 1.5px solid #fce7f3; position: relative;
-    transition: transform 0.2s, box-shadow 0.2s;
+  /* ---------- START / RESULT ---------- */
+  .center-card{
+    text-align:center;
   }
-  .plan-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(244,114,182,0.12); }
-  .plan-card.featured {
-    border: 2px solid var(--rose);
-    background: linear-gradient(160deg, white 60%, var(--rose-light));
+  .center-card p{color:var(--silver); font-size:16px; line-height:1.6;}
+  .start-name{
+    font-family:'Orbitron',sans-serif;
+    color:var(--omni-green);
   }
-  .popular-badge {
-    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-    background: var(--rose); color: white; font-size: 0.72rem; font-weight: 500;
-    padding: 0.3rem 1rem; border-radius: 50px; white-space: nowrap;
+  .big-score{
+    font-family:'Orbitron',sans-serif;
+    font-size:56px;
+    font-weight:900;
+    color:var(--omni-green);
+    margin:10px 0 4px;
+    text-shadow:0 0 20px rgba(57,255,106,0.5);
   }
-  .plan-name { font-size: 0.85rem; font-weight: 500; color: var(--text-mid); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.6rem; }
-  .plan-price { font-family: 'Playfair Display', serif; font-size: 2.4rem; margin-bottom: 0.3rem; }
-  .plan-price span { font-size: 1rem; font-family: 'DM Sans', sans-serif; color: var(--text-mid); font-weight: 300; }
-  .plan-desc { font-size: 0.85rem; color: var(--text-mid); margin-bottom: 1.3rem; font-weight: 300; line-height: 1.5; }
-  .plan-items { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
-  .plan-items li { font-size: 0.88rem; display: flex; align-items: center; gap: 0.5rem; }
-  .plan-items li::before { content: '✦'; color: var(--rose); font-size: 0.65rem; }
-  .plan-btn {
-    width: 100%; padding: 0.8rem; border-radius: 50px;
-    font-size: 0.92rem; font-weight: 500; cursor: pointer;
-    border: 1.5px solid var(--rose); background: transparent; color: var(--rose-deep);
-    transition: background 0.2s, color 0.2s;
+  .rank{
+    font-family:'Orbitron',sans-serif;
+    font-size:16px;
+    letter-spacing:2px;
+    color:var(--white);
+    margin-bottom:18px;
+    text-transform:uppercase;
   }
-  .plan-btn:hover { background: var(--rose); color: white; }
-  .plan-card.featured .plan-btn { background: var(--rose); color: white; }
-  .plan-card.featured .plan-btn:hover { background: var(--rose-deep); }
+  .action-row{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    margin-top:26px;
+    flex-wrap:wrap;
+  }
+  .hidden{display:none !important;}
 
-  .trust-section { background: var(--rose-light); padding: 3.5rem 2.5rem; text-align: center; }
-  .trust-stats { display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-top: 2.5rem; }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--rose-deep); }
-  .stat-label { font-size: 0.85rem; color: var(--text-mid); margin-top: 0.3rem; }
-
-  footer {
-    background: var(--text-dark); color: rgba(255,255,255,0.6);
-    padding: 2rem 2.5rem; text-align: center; font-size: 0.85rem;
-  }
-  .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: white; margin-bottom: 0.8rem; }
-  .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.82rem; }
-  .footer-links a:hover { color: var(--rose); }
-
-  @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; text-align: center; padding: 3rem 1.5rem; }
-    .hero-visual { margin-top: 2rem; }
-    .hero-actions { justify-content: center; }
-    nav ul { display: none; }
-    .trust-stats { gap: 2rem; }
+  @media (max-width:520px){
+    .card{padding:22px 18px;}
+    .q-text{font-size:19px;}
   }
 </style>
 </head>
 <body>
+<div class="stage">
 
-<nav>
-  <div class="logo">Glam<span>Box</span></div>
-  <ul>
-    <li><a href="#">Inicio</a></li>
-    <li><a href="#">Beneficios</a></li>
-    <li><a href="#">Suscripción</a></li>
-    <li><a href="#">Contacto</a></li>
-  </ul>
-  <button class="nav-cta">Suscribirme ahora</button>
-</nav>
+  <div class="header">
+    <div class="dial"></div>
+    <div class="eyebrow">Omnitrix · Sistema de reconocimiento alienígena</div>
+    <h1>Prueba de <span>Alien Data</span></h1>
+    <div class="subtitle">Edición especial para <strong>Kamyla</strong> — 50 preguntas sobre todas las especies del Omnitrix</div>
+  </div>
 
-<section>
-  <div class="hero">
-    <div>
-      <div class="hero-badge">✨ Nueva colección cada mes</div>
-      <h1>Tu dosis mensual de <em>belleza</em> a tu puerta</h1>
-      <p>Descubre productos de maquillaje cuidadosamente seleccionados para ti. Sin esfuerzo, sin complicaciones — solo glam.</p>
-      <div class="hero-actions">
-        <button class="btn-primary">Quiero mi caja 💄</button>
-        <button class="btn-secondary">Ver planes</button>
+  <!-- PANTALLA DE INICIO -->
+  <div class="card center-card" id="screen-start">
+    <p style="margin-top:0;">Hola <span class="start-name">Kamyla</span> 👋 Azmuth necesita verificar si de verdad conoces a todos los alienígenas de Ben 10.</p>
+    <p>Son <strong>50 preguntas</strong> de opción múltiple sobre las series originales, Alien Force, Ultimate Alien y Omniverse.</p>
+    <div class="action-row">
+      <button class="btn" id="btn-start">Activar Omnitrix ▸</button>
+    </div>
+  </div>
+
+  <!-- PANTALLA DE PREGUNTA -->
+  <div class="hidden" id="screen-quiz">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-label" id="progress-label">1 / 50</div>
+    </div>
+    <div class="card">
+      <div class="q-tag" id="q-tag">TRANSFORMACIÓN 01</div>
+      <p class="q-text" id="q-text">Pregunta</p>
+      <div class="options" id="options"></div>
+      <div class="footer-row">
+        <button class="btn" id="btn-next" disabled>Siguiente ▸</button>
       </div>
     </div>
-    <div class="hero-visual">
-      <div style="position: relative;">
-        <div class="hero-box">
-          <div class="box-emoji">🎁</div>
-          <div class="box-label">Tu GlamBox</div>
-          <div class="box-sub">Entregada el día 1 de cada mes</div>
-        </div>
-        <div class="floating-tag tag1">🌸 5–7 productos exclusivos</div>
-        <div class="floating-tag tag2">💚 Marcas cruelty-free</div>
-      </div>
-    </div>
   </div>
-</section>
 
-<section class="benefits-section">
-  <div class="section-label">Por qué GlamBox</div>
-  <h2 class="section-title">Lo mejor del maquillaje, sin salir de casa</h2>
-  <div class="benefits-grid">
-    <div class="benefit-card">
-      <div class="benefit-icon">💄</div>
-      <h3>Productos premium</h3>
-      <p>Marcas reconocidas y nuevos descubrimientos cada mes.</p>
-    </div>
-    <div class="benefit-card">
-      <div class="benefit-icon">🧴</div>
-      <h3>Personalizado para ti</h3>
-      <p>Selección basada en tu tipo de piel y preferencias.</p>
-    </div>
-    <div class="benefit-card">
-      <div class="benefit-icon">💸</div>
-      <h3>Ahorra hasta 60%</h3>
-      <p>Valor real de cada caja muy por encima del precio.</p>
-    </div>
-    <div class="benefit-card">
-      <div class="benefit-icon">🌿</div>
-      <h3>Cruelty-free</h3>
-      <p>Solo productos éticos y respetuosos con el medio ambiente.</p>
+  <!-- PANTALLA DE RESULTADOS -->
+  <div class="hidden card center-card" id="screen-result">
+    <div class="eyebrow" style="margin-bottom:10px;">Diagnóstico completo</div>
+    <div class="big-score" id="score-number">0/50</div>
+    <div class="rank" id="score-rank">RANGO</div>
+    <p id="score-msg"></p>
+    <div class="action-row">
+      <button class="btn" id="btn-retry">Reiniciar Omnitrix ↺</button>
     </div>
   </div>
-</section>
 
-<section class="sub-section">
-  <div class="section-label">Suscripción</div>
-  <h2 class="section-title">Elige tu plan</h2>
-  <div class="plans-grid">
-    <div class="plan-card">
-      <div class="plan-name">Esencial</div>
-      <div class="plan-price">$199 <span>/mes</span></div>
-      <div class="plan-desc">Perfecta para comenzar tu rutina de belleza.</div>
-      <ul class="plan-items">
-        <li>3 productos seleccionados</li>
-        <li>Labiales y sombras</li>
-        <li>Envío gratis</li>
-        <li>Cancela cuando quieras</li>
-      </ul>
-      <button class="plan-btn">Empezar</button>
-    </div>
-    <div class="plan-card featured">
-      <div class="popular-badge">⭐ Más popular</div>
-      <div class="plan-name">Glam Total</div>
-      <div class="plan-price">$349 <span>/mes</span></div>
-      <div class="plan-desc">La experiencia completa para las amantes del maquillaje.</div>
-      <ul class="plan-items">
-        <li>6 productos premium</li>
-        <li>Paletas, bases y más</li>
-        <li>Envío express gratis</li>
-        <li>Acceso anticipado a ediciones</li>
-        <li>Descuentos exclusivos</li>
-      </ul>
-      <button class="plan-btn">Suscribirme</button>
-    </div>
-    <div class="plan-card">
-      <div class="plan-name">Pro Glow</div>
-      <div class="plan-price">$499 <span>/mes</span></div>
-      <div class="plan-desc">Para las que no se conforman con menos que lo mejor.</div>
-      <ul class="plan-items">
-        <li>8+ productos de lujo</li>
-        <li>Marcas internacionales</li>
-        <li>Caja sorpresa limitada</li>
-        <li>Asesoría de imagen mensual</li>
-      </ul>
-      <button class="plan-btn">Quiero Pro</button>
-    </div>
-  </div>
-</section>
+</div>
 
-<section class="trust-section">
-  <div class="section-label">Confianza</div>
-  <h2 class="section-title">Miles de clientas ya lo viven</h2>
-  <div class="trust-stats">
-    <div>
-      <div class="stat-num">4.9/5</div>
-      <div class="stat-label">Valoración promedio</div>
-    </div>
-    <div>
-      <div class="stat-num">+10k</div>
-      <div class="stat-label">Suscriptoras activas</div>
-    </div>
-    <div>
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Cruelty-free</div>
-    </div>
-  </div>
-  <div style="margin-top: 3rem;">
-    <button class="btn-primary">¡Descarga GlamBox hoy mismo! 🛍️</button>
-  </div>
-</section>
+<script>
+const questions = [
+  {q:"¿Cómo se llama el reloj alienígena que usa Ben Tennyson?", o:["Omnitrix","Ultimatrix","Bio-Matriz","Ascensión"], a:0},
+  {q:"¿Quién creó el Omnitrix?", o:["Vilgax","Azmuth","Paradox","Max Tennyson"], a:1},
+  {q:"¿Cómo se llama el abuelo de Ben?", o:["Max Tennyson","Carl Tennyson","Grandpa Matt","Frank Tennyson"], a:0},
+  {q:"¿Cómo se llama la prima de Ben que aparece en toda la serie?", o:["Julie","Kai","Gwen Tennyson","Charmcaster"], a:2},
+  {q:"¿Cuál es el nombre del conquistador alienígena calamar, archienemigo de Ben?", o:["Vilgax","Aggregor","Zs'Skayr","Diagon"], a:0},
+  {q:"¿Cómo se llama el rival/amigo de Ben que puede absorber materiales?", o:["Cash Murray","Kevin Levin","Devlin","Michael Morningstar"], a:1},
+  {q:"¿Cuántos alienígenas tenía el Omnitrix original antes de desbloquear más?", o:["5","10","12","1"], a:1},
+  {q:"¿Cuál es el alienígena de fuego, de la especie Pyronite?", o:["Swampfire","Heatblast","NRG","Armodrillo"], a:1},
+  {q:"¿Qué alienígena tiene súper velocidad y es de la especie Kineceleran?", o:["XLR8","Fasttrack","Jetray","Rath"], a:0},
+  {q:"¿Qué alienígena está hecho de cristal, de la especie Petrosapien?", o:["Chromastone","Diamondhead","Armodrillo","Terraspin"], a:1},
+  {q:"¿Cómo se llama el alienígena con cuatro brazos y súper fuerza?", o:["Four Arms","Humungousaur","Cannonbolt","Rath"], a:0},
+  {q:"¿Qué alienígena diminuto y genio pertenece a la especie Galvan?", o:["Brainstorm","Grey Matter","Upgrade","Lodestar"], a:1},
+  {q:"¿Qué alienígena parecido a una polilla vuela y dispara baba pegajosa?", o:["Spidermonkey","Big Chill","Stinkfly","Whampire"], a:2},
+  {q:"¿Cómo se llama el alienígena pez que puede respirar bajo el agua?", o:["AmpFibian","Ripjaws","Water Hazard","Terraspin"], a:1},
+  {q:"¿Qué alienígena puede fusionarse con máquinas y es de metal líquido?", o:["Upgrade","NRG","Feedback","Goop"], a:0},
+  {q:"¿Qué alienígena sin ojos usa el olfato para rastrear, de la especie Vulpimancer?", o:["Wildmutt","Rath","Blitzwolfer","Fasttrack"], a:0},
+  {q:"¿Qué alienígena fantasma puede volverse invisible y absorber energía?", o:["Whampire","Ghostfreak","Big Chill","Alien X"], a:1},
+  {q:"¿Qué alienígena tiene forma de armadillo y rueda a gran velocidad para atacar?", o:["Cannonbolt","Armodrillo","Terraspin","Bloxx"], a:0},
+  {q:"¿Cómo se llama el alienígena gigante de la especie To'kustar?", o:["Humungousaur","Way Big","Atomix","NRG"], a:1},
+  {q:"¿Cuál es considerado el alienígena más poderoso del universo, formado por tres seres?", o:["Way Big","Atomix","Alien X","Feedback"], a:2},
+  {q:"¿Cómo se llaman las dos personalidades que comparten el control de Alien X junto con Ben?", o:["Serena y Bellicus","Vilgax y Aggregor","Paradox y Azmuth","Yenaldooshi y Zs'Skayr"], a:0},
+  {q:"¿Qué alienígena dinosaurio gigante aparece por primera vez en Alien Force?", o:["Humungousaur","Way Big","Four Arms","Terraspin"], a:0},
+  {q:"¿Qué alienígena de planta y fuego reemplaza a Heatblast en Alien Force?", o:["NRG","Swampfire","Armodrillo","Goop"], a:1},
+  {q:"¿Qué alienígena helado con alas puede volverse intangible como un fantasma?", o:["Big Chill","Whampire","Ghostfreak","AmpFibian"], a:0},
+  {q:"¿Qué alienígena de cristal absorbe y dispara energía cósmica?", o:["Diamondhead","Chromastone","Terraspin","Lodestar"], a:1},
+  {q:"¿Qué alienígena puede clonarse a sí mismo y atacar con ondas de sonido?", o:["Echo Echo","Feedback","Buzzshock","Spidermonkey"], a:0},
+  {q:"¿Qué alienígena mono con seis brazos teje telarañas resistentes?", o:["Wildmutt","Spidermonkey","Kickin Hawk","Rath"], a:1},
+  {q:"¿Qué alienígena es una masa verde viscosa capaz de regenerarse?", o:["Goop","Gutrot","Upgrade","AmpFibian"], a:0},
+  {q:"¿Qué alienígena parecido a un crustáceo es un genio con control mental?", o:["Brainstorm","Grey Matter","Eatle","Bloxx"], a:0},
+  {q:"¿Qué alienígena magnético puede controlar y manipular metales?", o:["Lodestar","NRG","Armodrillo","Shocksquatch"], a:0},
+  {q:"¿Qué alienígena furioso solo grita su propio nombre durante las peleas?", o:["Four Arms","Rath","Humungousaur","Gutrot"], a:1},
+  {q:"¿Qué alienígena volador, parecido a una raya, dispara rayos de energía por los ojos?", o:["Jetray","Astrodactyl","Big Chill","Stinkfly"], a:0},
+  {q:"¿Qué alienígena está compuesto de energía nuclear radiactiva contenida en un traje?", o:["NRG","Feedback","Atomix","Heatblast"], a:0},
+  {q:"¿Qué alienígena puede lanzar chorros de agua a alta presión?", o:["AmpFibian","Water Hazard","Ripjaws","Terraspin"], a:1},
+  {q:"¿Qué alienígena tortuga puede generar tornados girando su caparazón?", o:["Terraspin","Cannonbolt","Bloxx","Armodrillo"], a:0},
+  {q:"¿Qué alienígena de piedra tiene puños que funcionan como taladros?", o:["Armodrillo","Diamondhead","Chromastone","Gravattack"], a:0},
+  {q:"¿Qué alienígena puede volverse eléctrico y también respirar bajo el agua?", o:["AmpFibian","Feedback","Shocksquatch","Ripjaws"], a:0},
+  {q:"¿Qué alienígena camaleón puede volverse invisible y trepar paredes?", o:["ChamAlien","Ghostfreak","Big Chill","Wildmutt"], a:0},
+  {q:"En Ultimate Alien, ¿cómo se llama la evolución de un alienígena tras usar el Ultimatrix?", o:["Alien Definitivo (Ultimate)","Alien Supremo","Alien Omega","Alien Prime"], a:0},
+  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Swampfire?", o:["Ultimate Swampfire","Ultimate Humungousaur","Ultimate Big Chill","Ultimate Echo Echo"], a:0},
+  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Humungousaur?", o:["Ultimate Cannonbolt","Ultimate Humungousaur","Ultimate Four Arms","Ultimate Rath"], a:1},
+  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Echo Echo?", o:["Ultimate Echo Echo","Ultimate Spidermonkey","Ultimate Jetray","Ultimate NRG"], a:0},
+  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Big Chill?", o:["Ultimate Ghostfreak","Ultimate Big Chill","Ultimate Chromastone","Ultimate Goop"], a:1},
+  {q:"¿Cuál es la forma evolucionada 'Ultimate' de Spidermonkey?", o:["Ultimate Spidermonkey","Ultimate Wildmutt","Ultimate Stinkfly","Ultimate Whampire"], a:0},
+  {q:"En Ben 10: Omniverse, ¿qué alienígena cúbico puede separar su cuerpo en bloques individuales?", o:["Bloxx","Gravattack","Ball Weevil","Toepick"], a:0},
+  {q:"¿Qué alienígena de Omniverse es una versión evolucionada y veloz de la especie Kineceleran?", o:["XLR8","Fasttrack","Jetray","Kickin Hawk"], a:1},
+  {q:"¿Qué alienígena parecido a un yeti genera electricidad al gritar?", o:["Shocksquatch","AmpFibian","Feedback","NRG"], a:0},
+  {q:"¿Qué alienígena saltamontes gigante aparece en Ben 10: Omniverse?", o:["Crashhopper","Kickin Hawk","Astrodactyl","Bullfrag"], a:0},
+  {q:"¿Qué alienígena vampiro puede convertir a otras personas en sus esbirros?", o:["Ghostfreak","Whampire","Gutrot","Zs'Skayr"], a:1},
+  {q:"¿Qué alienígena parecido a un pterodáctilo, de Omniverse, vuela y genera ráfagas de energía cósmica?", o:["Jetray","Astrodactyl","Stinkfly","Big Chill"], a:1}
+];
 
-<footer>
-  <div class="footer-logo">Glam<span style="color: #F472B6; font-style: italic;">Box</span></div>
-  <div class="footer-links">
-    <a href="#">Contacto</a>
-    <a href="#">Instagram</a>
-    <a href="#">TikTok</a>
-    <a href="#">Términos y condiciones</a>
-    <a href="#">Privacidad</a>
-  </div>
-  <div style="font-size: 0.78rem;">© 2026 GlamBox · Todos los derechos reservados</div>
-</footer>
+let current = 0;
+let score = 0;
+let answered = false;
 
+const screenStart = document.getElementById('screen-start');
+const screenQuiz = document.getElementById('screen-quiz');
+const screenResult = document.getElementById('screen-result');
+const btnStart = document.getElementById('btn-start');
+const btnNext = document.getElementById('btn-next');
+const btnRetry = document.getElementById('btn-retry');
+const qTag = document.getElementById('q-tag');
+const qText = document.getElementById('q-text');
+const optionsEl = document.getElementById('options');
+const progressFill = document.getElementById('progress-fill');
+const progressLabel = document.getElementById('progress-label');
+
+function shuffle(arr){
+  // Fisher-Yates, no muta el original
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startQuiz(){
+  current = 0;
+  score = 0;
+  screenStart.classList.add('hidden');
+  screenResult.classList.add('hidden');
+  screenQuiz.classList.remove('hidden');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  answered = false;
+  btnNext.disabled = true;
+  const item = questions[current];
+  qTag.textContent = "TRANSFORMACIÓN " + String(current+1).padStart(2,'0');
+  qText.textContent = item.q;
+  progressLabel.textContent = (current+1) + " / " + questions.length;
+  progressFill.style.width = ((current)/questions.length*100) + "%";
+
+  const letters = ['A','B','C','D'];
+  const indices = shuffle([0,1,2,3]);
+  optionsEl.innerHTML = "";
+  indices.forEach((origIdx, pos) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = '<span class="letter">'+letters[pos]+'</span><span>'+item.o[origIdx]+'</span>';
+    btn.addEventListener('click', () => selectOption(btn, origIdx, item.a));
+    optionsEl.appendChild(btn);
+  });
+}
+
+function selectOption(btn, chosenIdx, correctIdx){
+  if(answered) return;
+  answered = true;
+  const allOpts = optionsEl.querySelectorAll('.opt');
+  allOpts.forEach(o => o.classList.add('locked'));
+
+  allOpts.forEach(o => {
+    if(o === btn && chosenIdx === correctIdx){
+      o.classList.add('correct');
+    }
+    if(o === btn && chosenIdx !== correctIdx){
+      o.classList.add('wrong');
+    }
+  });
+
+  if(chosenIdx === correctIdx){
+    score++;
+  } else {
+    // resaltar la correcta también
+    allOpts.forEach(o => {
+      if(o.textContent.trim().endsWith(questions[current].o[correctIdx])){
+        o.classList.add('correct');
+      }
+    });
+  }
+
+  progressFill.style.width = ((current+1)/questions.length*100) + "%";
+  btnNext.disabled = false;
+  btnNext.textContent = (current === questions.length-1) ? "Ver diagnóstico ▸" : "Siguiente ▸";
+}
+
+function nextQuestion(){
+  current++;
+  if(current >= questions.length){
+    showResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showResult(){
+  screenQuiz.classList.add('hidden');
+  screenResult.classList.remove('hidden');
+  document.getElementById('score-number').textContent = score + "/" + questions.length;
+
+  let rank, msg;
+  const pct = score/questions.length;
+  if(pct === 1){
+    rank = "Maestra Omniverse — Nivel Azmuth";
+    msg = "Perfecto, Kamyla. Conoces cada especie del Omnitrix mejor que el propio Ben. 🛸💚";
+  } else if(pct >= 0.8){
+    rank = "Portadora del Omnitrix";
+    msg = "Excelente puntaje. Podrías transformarte en cualquier alienígena sin dudar. 🔥";
+  } else if(pct >= 0.6){
+    rank = "Plumber en entrenamiento";
+    msg = "Muy bien. Ya conoces a los aliens principales, solo faltan algunos de Omniverse.";
+  } else if(pct >= 0.4){
+    rank = "Recluta de la Tierra";
+    msg = "Buen intento. Toca maratonear un par de temporadas más para subir de rango.";
+  } else {
+    rank = "Humano sin Omnitrix";
+    msg = "Jaja, no pasa nada — ¡esto es para divertirnos! ¿Repetimos el reto?";
+  }
+  document.getElementById('score-rank').textContent = rank;
+  document.getElementById('score-msg').textContent = msg;
+}
+
+btnStart.addEventListener('click', startQuiz);
+btnNext.addEventListener('click', nextQuestion);
+btnRetry.addEventListener('click', startQuiz);
+</script>
 </body>
 </html>
