@@ -91,6 +91,7 @@ h1,h2,h3{ font-family:'Orbitron', sans-serif; margin:0; }
 .badge.normal{ color: var(--gold); }
 .badge.dificil{ color:#ff9a5c; }
 .badge.muydificil{ color: var(--wrong); }
+.badge.experto{ color:#c792ff; }
 
 .q-count{ font-family:'Orbitron'; font-size:20px; color: var(--omni-green); font-weight:900; min-width:34px; text-align:center; }
 .q-count small{ display:block; font-family:'Rubik'; font-size:8px; color:var(--text-dim); font-weight:400; letter-spacing:1px; }
@@ -186,6 +187,7 @@ const ALIENS = {
     {id:'artico', nombre:'Ártico', especie:'Arburian Pelarota', poder:'Controla y dispara hielo', temp:3},
   ],
   alienforce: [
+    // Temporada 1 - los 10 aliens nuevos del Omnitrix recalibrado
     {id:'swampfire', nombre:'Fuego Pantanoso', especie:'Methanosian', poder:'Fuego combinado con regeneración vegetal', temp:1},
     {id:'chromastone', nombre:'Piedra Cósmica', especie:'Crystalsapien', poder:'Absorbe energía y la dispara amplificada', temp:1},
     {id:'jetray', nombre:'Rayo Veloz', especie:'Aerophibian', poder:'Vuelo supersónico y neurorrayos', temp:1},
@@ -196,14 +198,64 @@ const ALIENS = {
     {id:'brainstorm', nombre:'Cerebro Maestro', especie:'Cerebrocrustacean', poder:'Superinteligencia con descargas eléctricas', temp:1},
     {id:'spidermonkey', nombre:'Mono Araña', especie:'Arachnichimp', poder:'Telaraña y agilidad con seis extremidades', temp:1},
     {id:'alienx', nombre:'Alien X', especie:'Celestialsapien', poder:'Poder cósmico casi ilimitado sobre la realidad', temp:1},
-  ]
+    // Temporada 2 - se suman por ADN/códigos
+    {id:'nanomech', nombre:'Nanomech', especie:'Nanochip', poder:'Se encoge a tamaño microscópico y dispara rayos', temp:2},
+    {id:'cannonbolt', nombre:'Cañonazo', especie:'Arburian Pelarota', poder:'Se enrolla en una bola blindada imparable', temp:2},
+    // Temporada 3 - últimos desbloqueados por código
+    {id:'lodestar', nombre:'Guíaestelar', especie:'Biosovortiano', poder:'Controla el magnetismo y atrae metales', temp:3},
+    {id:'rath', nombre:'Rath', especie:'Appoplexian', poder:'Fuerza y garras feroces con temperamento explosivo', temp:3},
+  ],
+  ultimatealien: [
+    // Temporada 1 - aliens de Andrómeda (arco de Aggregor)
+    {id:'ampfibian', nombre:'AnfiBio', especie:'Amperi', poder:'Absorbe y dispara electricidad, vuela y nada', temp:1},
+    {id:'armodrillo', nombre:'Armodrillo', especie:'Talpaedano', poder:'Genera terremotos golpeando el suelo con los puños', temp:1},
+    {id:'terraspin', nombre:'Tortutornado', especie:'Geochelone Aerio', poder:'Se oculta en su caparazón y genera tornados', temp:1},
+    {id:'nrg', nombre:'NRG', especie:'Prypiatosiano-B', poder:'Núcleo de radiación nuclear dentro de un traje contenedor', temp:1},
+    // Temporada 2
+    {id:'fasttrack', nombre:'Vía Rápida', especie:'Kineceleran', poder:'Supervelocidad con más fuerza y garras', temp:2},
+    {id:'chamalien', nombre:'Camaleón', especie:'Merlinisapien', poder:'Camuflaje total y trepa por paredes', temp:2},
+    {id:'clockwork', nombre:'Relojero', especie:'Cronosapien', poder:'Manipula y detiene el tiempo', temp:2},
+    // Temporada 3
+    {id:'shocksquatch', nombre:'Pie Grande Eléctrico', especie:'Sasquatch', poder:'Genera y controla electricidad', temp:3},
+    {id:'eatle', nombre:'Escarabajo', especie:null, poder:'Devora materiales y los convierte en potentes rayos láser', temp:3},
+    {id:'juryrigg', nombre:'Chatarrero', especie:null, poder:'Desarma y reconstruye tecnología a su antojo', temp:3},
+  ],
+  omniverse: [
+    // Bloque 1 (temporadas 1-3 del arco Omniverse)
+    {id:'feedback', nombre:'Retroalimentación', especie:'Conductoid', poder:'Absorbe cualquier tipo de energía y la dispara amplificada', temp:1},
+    {id:'bloxx', nombre:'Bloxx', especie:null, poder:'Cuerpo hecho de bloques que se separan y reconstruyen', temp:1},
+    {id:'gravattack', nombre:'Gravedad', especie:'Galileano', poder:'Controla la gravedad y el magnetismo de los objetos', temp:1},
+    {id:'crashhopper', nombre:'Saltamontes', especie:null, poder:'Salta con una fuerza explosiva usando sus patas', temp:1},
+    // Bloque 2 (temporadas 4-6)
+    {id:'ballweevil', nombre:'Bicho Bola', especie:null, poder:'Se enrolla en una bola blindada casi indestructible', temp:2},
+    {id:'walkatrout', nombre:'Pez Andante', especie:null, poder:'Transforma objetos y enemigos con su lengua pegajosa', temp:2},
+    {id:'peskydust', nombre:'Polvo Molesto', especie:null, poder:'Vuela y lanza polvo que provoca alucinaciones', temp:2},
+    {id:'molestache', nombre:'Topo Bigotes', especie:null, poder:'Excava a gran velocidad usando su bigote como taladro', temp:2},
+    {id:'atomix', nombre:'Atomix', especie:null, poder:'Libera explosiones de energía atómica casi ilimitada', temp:2},
+    // Bloque 3 (temporadas 7-8)
+    {id:'theworst', nombre:'El Peor', especie:null, poder:'Se divide en mini clones que emiten gases tóxicos', temp:3},
+    {id:'kickinhawk', nombre:'Halcón Patador', especie:null, poder:'Artes marciales con plumas afiladas como espadas', temp:3},
+    {id:'whampire', nombre:'Vampiro', especie:'Vladat', poder:'Convierte enemigos en sirvientes con su mordida y planea', temp:3},
+  ],
 };
 
 const SEASONS = [
   {serie:'clasico', serieLabel:'Ben 10 (Clásico)', temp:1, label:'Temporada 1', desc:'Los 10 aliens originales del Omnitrix', dificultad:'facil', dificultadLabel:'Fácil'},
   {serie:'clasico', serieLabel:'Ben 10 (Clásico)', temp:2, label:'Temporada 2', desc:'Los originales + los nuevos desbloqueados', dificultad:'normal', dificultadLabel:'Normal'},
-  {serie:'clasico', serieLabel:'Ben 10 (Clásico)', temp:3, label:'Temporada 3', desc:'Casi todo el ADN acumulado hasta ahora', dificultad:'dificil', dificultadLabel:'Difícil'},
-  {serie:'alienforce', serieLabel:'Ben 10: Alien Force', temp:1, label:'Temporada 1', desc:'Nuevo Omnitrix, 10 aliens totalmente nuevos', dificultad:'dificil', dificultadLabel:'Difícil'},
+  {serie:'clasico', serieLabel:'Ben 10 (Clásico)', temp:3, label:'Temporada 3', desc:'Se suman Blitzwolfer, Frankentrueno y Muy Grande', dificultad:'dificil', dificultadLabel:'Difícil'},
+  {serie:'clasico', serieLabel:'Ben 10 (Clásico)', temp:4, label:'Temporada 4', desc:'ADN completo de la serie original: 19 aliens', dificultad:'muydificil', dificultadLabel:'Muy difícil'},
+
+  {serie:'alienforce', serieLabel:'Ben 10: Alien Force', temp:1, label:'Temporada 1', desc:'Omnitrix recalibrado: 10 aliens totalmente nuevos', dificultad:'normal', dificultadLabel:'Normal'},
+  {serie:'alienforce', serieLabel:'Ben 10: Alien Force', temp:2, label:'Temporada 2', desc:'Se suman Nanomech y Cañonazo', dificultad:'dificil', dificultadLabel:'Difícil'},
+  {serie:'alienforce', serieLabel:'Ben 10: Alien Force', temp:3, label:'Temporada 3', desc:'Se suman Guíaestelar y Rath por código', dificultad:'muydificil', dificultadLabel:'Muy difícil'},
+
+  {serie:'ultimatealien', serieLabel:'Ben 10: Ultimate Alien', temp:1, label:'Temporada 1', desc:'Nuevo Ultimatrix: los 4 aliens de Andrómeda', dificultad:'dificil', dificultadLabel:'Difícil'},
+  {serie:'ultimatealien', serieLabel:'Ben 10: Ultimate Alien', temp:2, label:'Temporada 2', desc:'Se suman Vía Rápida, Camaleón y Relojero', dificultad:'muydificil', dificultadLabel:'Muy difícil'},
+  {serie:'ultimatealien', serieLabel:'Ben 10: Ultimate Alien', temp:3, label:'Temporada 3', desc:'Se suman Pie Grande Eléctrico, Escarabajo y Chatarrero', dificultad:'experto', dificultadLabel:'Experto'},
+
+  {serie:'omniverse', serieLabel:'Ben 10: Omniverse', temp:1, label:'Bloque 1 (Temp. 1-3)', desc:'Retroalimentación, Bloxx, Gravedad y Saltamontes', dificultad:'dificil', dificultadLabel:'Difícil'},
+  {serie:'omniverse', serieLabel:'Ben 10: Omniverse', temp:2, label:'Bloque 2 (Temp. 4-6)', desc:'Se suman Bicho Bola, Pez Andante, Polvo Molesto, Topo Bigotes y Atomix', dificultad:'muydificil', dificultadLabel:'Muy difícil'},
+  {serie:'omniverse', serieLabel:'Ben 10: Omniverse', temp:3, label:'Bloque 3 (Temp. 7-8)', desc:'Se suman El Peor, Halcón Patador y Vampiro', dificultad:'experto', dificultadLabel:'Experto'},
 ];
 
 function poolFor(season){
@@ -223,7 +275,8 @@ function buildQuestions(season){
 
   const order = shuffle(pool);
   return order.map(alien => {
-    const type = types[Math.floor(Math.random()*types.length)];
+    let type = types[Math.floor(Math.random()*types.length)];
+    if(type==='especie' && !alien.especie) type = 'poder';
     if(type==='poder'){
       const wrong = pick(pool.filter(a=>a.id!==alien.id),3).map(a=>a.poder);
       return {
@@ -234,12 +287,23 @@ function buildQuestions(season){
       };
     }
     if(type==='especie'){
-      const wrong = pick(pool.filter(a=>a.especie!==alien.especie),3).map(a=>a.especie);
+      const wrongPoolEsp = pool.filter(a=>a.especie && a.especie!==alien.especie);
+      if(wrongPoolEsp.length>=3){
+        const wrong = pick(wrongPoolEsp,3).map(a=>a.especie);
+        return {
+          meta:`Especie — ${season.serieLabel}`,
+          text:`¿A qué especie pertenece "${alien.nombre}"?`,
+          options: shuffle([alien.especie, ...wrong]),
+          answer: alien.especie,
+        };
+      }
+      // no hay suficientes especies distintas en el pool: cae a pregunta de poder
+      const wrong = pick(pool.filter(a=>a.id!==alien.id),3).map(a=>a.poder);
       return {
-        meta:`Especie — ${season.serieLabel}`,
-        text:`¿A qué especie pertenece "${alien.nombre}"?`,
-        options: shuffle([alien.especie, ...wrong]),
-        answer: alien.especie,
+        meta:`Poder — ${season.serieLabel}`,
+        text:`¿Cuál es el poder de "${alien.nombre}"?`,
+        options: shuffle([alien.poder, ...wrong]),
+        answer: alien.poder,
       };
     }
     if(type==='intruso' && allOtherSeasonAliens.length>=3){
@@ -307,6 +371,7 @@ function renderHome(){
       <div class="eyebrow">Prueba de ADN alienígena</div>
       <h1>OMNITRIX: PRUEBA DE ADN</h1>
       <p>Elige una serie y temporada. Entre más aliens haya desbloqueado Ben para ese momento,<br>más preguntas y más difícil será la prueba.</p>
+      <p style="font-size:11.5px; opacity:0.7; margin-top:10px;">Nota: Omniverse tiene 8 temporadas cortas de ~10 episodios, así que aquí van agrupadas en 3 bloques.</p>
     </div>
     ${Object.entries(groups).map(([serie, seasons])=>`
       <div class="serie-group">
