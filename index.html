@@ -139,6 +139,16 @@ h1,h2,h3{ font-family:'Orbitron', sans-serif; margin:0; }
 .results .score-big{ font-family:'Orbitron'; font-size:52px; font-weight:900; color:#fff; text-shadow:0 0 20px rgba(57,255,154,0.4); }
 .results p{ color: var(--text-dim); font-size:13.5px; line-height:1.6; }
 .results-actions{ display:flex; gap:10px; margin-top:22px; flex-wrap:wrap; justify-content:center;}
+
+.review{ text-align:left; margin-top: 26px; border-top: 1px solid rgba(57,255,154,0.15); padding-top: 18px; }
+.review-title{ font-size:12px; letter-spacing:2px; text-transform:uppercase; color: var(--text-dim); margin-bottom: 12px; text-align:center; }
+.review-empty{ text-align:center; color: var(--omni-green); font-size:13.5px; }
+.review-item{ background:#0d1712; border:1px solid rgba(255,92,92,0.25); border-radius:8px; padding:12px 14px; margin-bottom:9px; }
+.review-q{ font-size:13px; color:#fff; margin-bottom:7px; line-height:1.4; }
+.review-row{ font-size:12.5px; margin-bottom:3px; display:flex; gap:6px; }
+.review-row .lbl{ color: var(--text-dim); min-width:64px; flex-shrink:0; }
+.review-row .val.wrong{ color: var(--wrong); }
+.review-row .val.right{ color: var(--omni-green); }
 .btn{
   font-family:'Orbitron'; font-size:12px; font-weight:700; letter-spacing:1px;
   padding:12px 18px; border-radius:8px; cursor:pointer; border:1px solid var(--omni-green);
@@ -329,7 +339,7 @@ function buildQuestions(season){
 }
 
 /* ---------------- STATE ---------------- */
-let state = { screen:'home', season:null, questions:[], idx:0, score:0, answered:false };
+let state = { screen:'home', season:null, questions:[], idx:0, score:0, answered:false, history:[] };
 
 /* ---------------- RENDER ---------------- */
 const app = document.getElementById('app');
@@ -395,7 +405,7 @@ function renderHome(){
     const start = ()=>{
       const serie = card.dataset.serie, temp = Number(card.dataset.temp);
       const season = SEASONS.find(s=>s.serie===serie && s.temp===temp);
-      state = { screen:'quiz', season, questions: buildQuestions(season), idx:0, score:0, answered:false };
+      state = { screen:'quiz', season, questions: buildQuestions(season), idx:0, score:0, answered:false, history:[] };
       render();
     };
     card.addEventListener('click', start);
@@ -441,6 +451,7 @@ function renderQuiz(){
       const chosen = decodeURIComponent(btn.dataset.opt);
       const correct = chosen === q.answer;
       if(correct) state.score++;
+      state.history.push({ text: q.text, chosen, answer: q.answer, correct });
       optBtns.forEach(b=>{
         b.disabled = true;
         const val = decodeURIComponent(b.dataset.opt);
@@ -476,6 +487,8 @@ function renderResults(){
   else if(pct>=40){ rank='Aprendiz de Plomero'; msg='Vas por buen camino, pero te faltan algunas fichas de ADN.'; }
   else { rank='Novato del Omnitrix'; msg='Toca darle rewatch a la temporada antes de la próxima misión.'; }
 
+  const fallos = state.history.filter(h=>!h.correct);
+
   app.innerHTML = `
     <div class="q-card results">
       <div class="eyebrow">${state.season.serieLabel} · ${state.season.label}</div>
@@ -486,10 +499,20 @@ function renderResults(){
         <button class="btn primary" id="retry">REPETIR</button>
         <button class="btn ghost" id="home">OTRA TEMPORADA</button>
       </div>
+      <div class="review">
+        <div class="review-title">Preguntas falladas (${fallos.length})</div>
+        ${fallos.length===0 ? '<div class="review-empty">¡Ninguna! ADN perfecto en esta temporada.</div>' : fallos.map(f=>`
+          <div class="review-item">
+            <div class="review-q">${f.text}</div>
+            <div class="review-row"><span class="lbl">Tu respuesta:</span><span class="val wrong">${f.chosen}</span></div>
+            <div class="review-row"><span class="lbl">Correcta:</span><span class="val right">${f.answer}</span></div>
+          </div>
+        `).join('')}
+      </div>
     </div>
   `;
   document.getElementById('retry').addEventListener('click', ()=>{
-    state = { screen:'quiz', season:state.season, questions: buildQuestions(state.season), idx:0, score:0, answered:false };
+    state = { screen:'quiz', season:state.season, questions: buildQuestions(state.season), idx:0, score:0, answered:false, history:[] };
     render();
   });
   document.getElementById('home').addEventListener('click', ()=>{ state.screen='home'; render(); });
